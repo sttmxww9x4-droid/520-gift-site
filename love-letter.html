@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>给你的一封 520 情书</title>
+  <style>
+    :root {
+      --bg1: #120b06;
+      --bg2: #2b1d10;
+      --gold: #ffd79e;
+      --gold-soft: #ffefcf;
+      --text: #fff9ef;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: auto;
+      padding: 24px 14px;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: radial-gradient(circle at 50% -10%, #3b2a18 0%, var(--bg2) 33%, var(--bg1) 100%);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20px 40px, rgba(255, 232, 189, 0.7), transparent),
+        radial-gradient(1px 1px at 150px 120px, rgba(255, 214, 150, 0.8), transparent),
+        radial-gradient(2px 2px at 300px 70px, rgba(255, 241, 209, 0.7), transparent),
+        radial-gradient(1px 1px at 350px 170px, rgba(255, 214, 150, 0.75), transparent);
+      background-size: 380px 220px;
+      animation: drift 16s linear infinite;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-220px); }
+    }
+
+    .card {
+      position: relative;
+      width: min(90vw, 700px);
+      border-radius: 28px;
+      padding: clamp(24px, 4vw, 36px);
+      background: linear-gradient(160deg, rgba(255, 238, 202, 0.12), rgba(255, 200, 128, 0.1));
+      border: 1px solid rgba(255, 226, 173, 0.38);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 210, 131, 0.2);
+      backdrop-filter: blur(3px);
+      z-index: 1;
+      animation: popIn 0.8s ease;
+      max-height: 90vh;
+      overflow: auto;
+    }
+
+    .easter-title {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: clamp(1.8rem, 4.6vw, 2.7rem);
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      text-shadow: 0 0 14px rgba(255, 213, 141, 0.55);
+    }
+
+    .sub {
+      text-align: center;
+      color: #ffe6be;
+      margin-bottom: 20px;
+      font-size: clamp(0.95rem, 2.6vw, 1.1rem);
+      opacity: 0.95;
+    }
+
+    .quick-show {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 222, 165, 0.52);
+      background: rgba(255, 212, 143, 0.16);
+      color: #ffe7bf;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    }
+
+    .quick-show:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 220, 162, 0.24);
+      box-shadow: 0 0 14px rgba(255, 210, 139, 0.32);
+    }
+
+    .letter {
+      line-height: 1.95;
+      font-size: clamp(1.05rem, 2.8vw, 1.28rem);
+      color: var(--gold-soft);
+      text-align: left;
+      min-height: 260px;
+    }
+
+    .letter .strong {
+      color: #ffd796;
+      font-weight: 700;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 0.65ch;
+      color: #ffd79e;
+      animation: blink 0.9s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 45% { opacity: 1; }
+      46%, 100% { opacity: 0; }
+    }
+
+    .sign {
+      margin-top: 20px;
+      text-align: right;
+      color: #ffdca7;
+      font-size: 1.02rem;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .sign.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .actions {
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .actions.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn-main {
+      color: #2b1808;
+      background: linear-gradient(135deg, #ffe5b6, #ffc97f);
+      box-shadow: 0 0 16px rgba(255, 211, 142, 0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 22px rgba(255, 209, 136, 0.45);
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <main class="card">
+    <h1 class="easter-title" id="easterTitle">给你的一封 520 情书</h1>
+    <p class="sub">To my sweetheart</p>
+    <button class="quick-show" id="showAllBtn" type="button">⚡ 直接查看全文</button>
+    <div class="letter" id="letterContent"></div>
+    <p class="sign">- 爱你的汪涌祺 -</p>
+    <div class="actions">
+      <a class="btn btn-main" href="./index.html">💕 回到爱心页</a>
+    </div>
+  </main>
+  <script>
+    const letterParagraphs = [
+      "给最爱的子欣：💌",
+      "有时候我会想，喜欢一个人到底是什么感觉。后来我慢慢明白，喜欢不是一句“我爱你”就能说完的事情，而是每天醒来第一时间想起你，看到好看的云、好吃的店、好听的歌，都想立刻分享给你；是走在路上会下意识靠近你一点，过马路会自然牵住你的手；也是明明平凡的一天，因为有你在，就突然变得闪闪发光。你大概不知道，你笑起来的时候，我会在心里悄悄想，今天真好，原来幸福可以这么具体。✨",
+      "谢谢你来到我的世界。谢谢你认真听我说那些琐碎的小事，谢谢你在我低落的时候给我拥抱，在我迷茫的时候给我鼓励，在我偶尔笨拙、偶尔固执的时候依然愿意理解我。你给我的从来不只是“陪伴”这两个字，而是一种很踏实的安心：我知道，不管外面的风有多大，只要回到你身边，我就能安静下来。你像一盏灯，温柔地照亮我，也让我愿意变成更好的人。🤍",
+      "我喜欢我们在一起的每一个瞬间。喜欢和你并肩散步；喜欢和你去逛超市，一边纠结买哪种零食，一边讨论晚饭吃什么；喜欢你叫我名字时的语气，喜欢你认真说话时发亮的眼睛，喜欢你偶尔撒娇、偶尔“凶我”又忍不住笑出来的可爱样子。原来爱情真的会把日子变成诗，而你就是我最喜欢的一行。🥰",
+      "也许我不是最完美的人，会有粗心的时候，会有情绪不好的时候，也会有表达不够好的时候。但我想让你知道，我一直在学着更好地爱你。爱你不是一句口号，而是我每天都在做的选择：多一点耐心，多一点理解，多一点拥抱，多一点“我在”。我学会了在你不开心的时候先抱抱你，在你沉默的时候先听听你，在你需要我的时候第一时间站在你身边。因为你值得被认真对待，值得被偏爱，值得被放在心里最重要的位置。",
+      "和你在一起后，我越来越相信“未来”这两个字。以前我对明天没有太多想象，现在我会认真设想很多很多画面：想和你去看海，在海边等一次日出；想和你去一座陌生的城市，边走边拍照，累了就找家小店坐着聊天；想在冬天和你围同一条围巾，夏天和你吃同一支冰淇淋；想把每一个普通节日都过成我们的纪念日。更想在很多年以后，我们还是会像现在这样，牵着手，笑着说“还好是你”。🌈",
+      "我知道，真正长久的感情不是每天都轰轰烈烈，而是在柴米油盐里依然愿意互相体谅，在日复一日里依然愿意互相珍惜。以后我们可能也会有争执，也会有疲惫，但我希望我们都记得今天的心意：遇到问题就一起面对，遇到误会就好好说开，遇到难过就互相拥抱。你不用总是坚强，在我这里，你可以做最真实的自己。开心就笑，不开心就哭，累了就靠过来，我会一直在。",
+      "宝宝，谢谢你让我懂得，爱不是占有，而是尊重；不是一时冲动，而是长久的心甘情愿。你让我明白，最好的关系，是两个人都能在彼此的爱里成长，变得更温柔、更勇敢。因为你，我开始期待每一个明天；因为你，我对生活有了更多热爱。你不是我无聊时的消遣，而是我认真规划未来时，唯一想写进答案的人。",
+      "今天是 520，我想认真地告诉你：我真的很喜欢你，喜欢到想把所有温柔都给你；我真的很在乎你，在乎到你的情绪会轻轻牵动我的心；我真的很想和你一直走下去，不是只陪你一阵子，而是想陪你很久很久。以后不管是晴天、雨天，还是偶尔的阴天，我都想做那个和你一起撑伞、一起淋雨、也一起等天晴的人。🌙",
+      "如果爱有答案，那我的答案一直都是你；如果幸福有方向，那我的方向一直都是你。谢谢你成为我的例外、我的偏爱、我的心安。愿往后的每一年，我们都还能在彼此眼里看到最初的心动，也在彼此身边拥有最踏实的归属。愿你永远被爱、永远可爱、永远做自己；而我，会一直把你放在心上，认真爱你，长长久久地爱你。",
+      "520 快乐，我的宝宝。🎀\n我爱你，不止今天，不止 520。❤️",
+      "永远爱你的汪涌祺嘻嘻（qwq）🐶",
+      "Ps：我攒攒钱给你买个电脑，这个礼物希望你喜欢（先将就一下哈，等我攒够了就送你个大礼物嘿嘿）"
+    ];
+
+    const contentEl = document.getElementById("letterContent");
+    const signEl = document.querySelector(".sign");
+    const actionsEl = document.querySelector(".actions");
+    const cardEl = document.querySelector(".card");
+    const showAllBtn = document.getElementById("showAllBtn");
+    const easterTitle = document.getElementById("easterTitle");
+    let skipTyping = false;
+    let typingToken = 0;
+    let titleTapCount = 0;
+    let titleTapTimer = null;
+
+    function sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    async function typeParagraph(text, speed, strong, token) {
+      const p = document.createElement("p");
+      p.style.marginBottom = "18px";
+      if (strong) p.className = "strong";
+
+      const cursor = document.createElement("span");
+      cursor.className = "typing-cursor";
+      cursor.textContent = "|";
+      p.appendChild(cursor);
+      contentEl.appendChild(p);
+
+      let output = "";
+      for (const ch of text) {
+        if (skipTyping || token !== typingToken) {
+          cursor.remove();
+          return false;
+        }
+        output += ch === "\n" ? "<br />" : ch;
+        p.innerHTML = output;
+        p.appendChild(cursor);
+        cardEl.scrollTop = cardEl.scrollHeight;
+        await sleep(speed + Math.random() * 18);
+      }
+      cursor.remove();
+      return true;
+    }
+
+    function renderAllImmediately() {
+      contentEl.innerHTML = "";
+      for (let i = 0; i < letterParagraphs.length; i += 1) {
+        const p = document.createElement("p");
+        p.style.marginBottom = "18px";
+        if (i === 10) p.className = "strong";
+        p.innerHTML = letterParagraphs[i].replace(/\n/g, "<br />");
+        contentEl.appendChild(p);
+      }
+      signEl.classList.add("show");
+      actionsEl.classList.add("show");
+      showAllBtn.style.display = "none";
+      cardEl.scrollTop = 0;
+    }
+
+    async function runTyping() {
+      const token = ++typingToken;
+      for (let i = 0; i < letterParagraphs.length; i += 1) {
+        if (skipTyping || token !== typingToken) return;
+        const para = letterParagraphs[i];
+        const strong = i === 10;
+        const ok = await typeParagraph(para, i === 0 ? 30 : 18, strong, token);
+        if (!ok) return;
+        await sleep(190);
+      }
+      signEl.classList.add("show");
+      actionsEl.classList.add("show");
+      showAllBtn.style.display = "none";
+    }
+
+    showAllBtn.addEventListener("click", () => {
+      skipTyping = true;
+      typingToken += 1;
+      renderAllImmediately();
+    });
+
+    easterTitle.addEventListener("click", () => {
+      titleTapCount += 1;
+      if (titleTapTimer) clearTimeout(titleTapTimer);
+
+      if (titleTapCount >= 3) {
+        window.location.href = "./future-gift.html";
+        return;
+      }
+
+      titleTapTimer = setTimeout(() => {
+        titleTapCount = 0;
+      }, 1100);
+    });
+
+    runTyping();
+  </script>
+</body>
+</html>
