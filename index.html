@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>送给最爱的你 - 520</title>
+  <title>陈依子欣的520礼物</title>
   <style>
     :root {
-      --bg1: #080603;
-      --bg2: #1a1209;
-      --gold: #ffd18a;
-      --gold-light: #ffe6b9;
-      --text: #fff8ea;
+      --bg1: #120014;
+      --bg2: #321047;
+      --pink: #ff5d96;
+      --pink-light: #ffc1d8;
+      --text: #fff6fb;
     }
 
     * {
@@ -23,337 +23,588 @@
       min-height: 100vh;
       overflow: hidden;
       font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-      background: radial-gradient(circle at 50% 0%, #2b2012 0%, var(--bg2) 28%, var(--bg1) 75%, #020202 100%);
-      color: var(--text);
       display: grid;
       place-items: center;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, rgba(10, 5, 20, 0.72), rgba(4, 2, 10, 0.9)),
+        url("./assets/disney-castle.png") center/cover no-repeat;
       position: relative;
+      opacity: 0;
+      transform: scale(1.01);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    body.page-ready {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    body.page-leave {
+      opacity: 0;
+      transform: scale(0.99);
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 24%, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.5) 62%, rgba(0, 0, 0, 0.72) 100%),
+        linear-gradient(180deg, rgba(5, 2, 10, 0.18), rgba(3, 1, 7, 0.45));
+      z-index: 0;
+      pointer-events: none;
     }
 
     .stars {
       position: absolute;
       inset: 0;
       background-image:
-        radial-gradient(2px 2px at 30px 45px, rgba(255, 228, 170, 0.7), transparent),
-        radial-gradient(1px 1px at 180px 80px, rgba(255, 225, 168, 0.75), transparent),
-        radial-gradient(1px 1px at 290px 140px, rgba(255, 243, 205, 0.7), transparent),
-        radial-gradient(2px 2px at 350px 30px, rgba(255, 216, 146, 0.7), transparent);
-      background-size: 380px 220px;
-      animation: skyMove 18s linear infinite;
-      opacity: 0.32;
+        radial-gradient(2px 2px at 30px 40px, rgba(255, 211, 230, 0.9), transparent),
+        radial-gradient(1px 1px at 130px 120px, rgba(255, 232, 241, 0.85), transparent),
+        radial-gradient(1px 1px at 320px 160px, rgba(255, 232, 241, 0.85), transparent),
+        radial-gradient(2px 2px at 410px 60px, rgba(255, 191, 220, 0.85), transparent);
+      background-size: 460px 240px;
+      animation: starMove 16s linear infinite;
+      opacity: 0.26;
       pointer-events: none;
     }
 
-    @keyframes skyMove {
-      from { transform: translateY(0); }
-      to { transform: translateY(-200px); }
-    }
-
-    .wrap {
-      position: relative;
-      width: min(94vw, 700px);
-      text-align: center;
-      z-index: 2;
-    }
-
-    .heart-scene {
-      position: relative;
-      width: min(92vw, 520px);
-      height: min(64vw, 360px);
-      margin: 0 auto 20px;
-      filter: drop-shadow(0 0 20px rgba(255, 214, 147, 0.42));
-      animation: float 3.4s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    #heartCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .ring {
+    .fireworks-canvas {
       position: absolute;
       inset: 0;
-      border: 1px solid rgba(255, 213, 145, 0.2);
-      border-radius: 50%;
-      transform: scale(0.35);
-      opacity: 0;
-      animation: pulse 3s ease-out infinite;
       pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen;
+      opacity: 1;
+      filter: brightness(1.18) saturate(1.15);
     }
 
-    .ring:nth-child(2) { animation-delay: 0.6s; }
-    .ring:nth-child(3) { animation-delay: 1.2s; }
+    @keyframes starMove {
+      from { transform: translateY(0); }
+      to { transform: translateY(-220px); }
+    }
 
-    @keyframes pulse {
-      0% { transform: scale(0.35); opacity: 0.4; }
-      100% { transform: scale(1.4); opacity: 0; }
+    .cover {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: min(92vw, 720px);
+      padding: clamp(24px, 4.5vw, 40px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 194, 218, 0.35);
+      background: linear-gradient(160deg, rgba(255, 206, 228, 0.14), rgba(255, 153, 194, 0.08));
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.32), 0 0 20px rgba(255, 158, 201, 0.2);
+      backdrop-filter: blur(2px);
+      animation: fadeUp 0.8s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     h1 {
-      font-size: clamp(1.8rem, 4.7vw, 2.7rem);
-      margin-bottom: 12px;
+      font-size: clamp(2rem, 6vw, 3.2rem);
       letter-spacing: 2px;
-      text-shadow: 0 0 16px rgba(255, 210, 146, 0.6);
+      text-shadow: 0 0 16px rgba(255, 162, 202, 0.7);
     }
 
-    .msg {
-      font-size: clamp(1rem, 2.8vw, 1.25rem);
-      line-height: 1.8;
-      opacity: 0.95;
-      padding: 0 10px;
+    .gift-wrap {
+      margin-top: 24px;
+      display: grid;
+      justify-items: center;
+      gap: 12px;
     }
 
-    .highlight {
-      color: #ffe2b1;
-      font-weight: 700;
+    .gift-btn {
+      position: relative;
+      width: 170px;
+      height: 138px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.22s ease;
     }
 
-    .footer {
-      margin-top: 18px;
-      font-size: 0.95rem;
-      color: #f8d5a1;
-      opacity: 0.92;
+    .gift-btn:hover {
+      transform: translateY(-3px) scale(1.02);
     }
 
-    .enter-btn {
-      margin-top: 18px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 225, 172, 0.55);
-      background: linear-gradient(135deg, rgba(255, 219, 151, 0.2), rgba(255, 180, 96, 0.28));
-      color: #ffe9c8;
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      box-shadow: 0 0 18px rgba(255, 196, 102, 0.3);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-      backdrop-filter: blur(2px);
+    .gift-btn:focus-visible {
+      filter: drop-shadow(0 0 8px rgba(255, 196, 221, 0.9));
     }
 
-    .enter-btn:hover {
-      transform: translateY(-2px) scale(1.03);
-      background: linear-gradient(135deg, rgba(255, 229, 179, 0.34), rgba(255, 184, 96, 0.4));
-      box-shadow: 0 0 26px rgba(255, 208, 130, 0.45);
-    }
-
-    .enter-btn:active {
-      transform: translateY(0) scale(0.98);
-    }
-
-    .tiny-heart {
+    .gift-lid {
       position: absolute;
-      width: 18px;
-      height: 18px;
-      background: linear-gradient(135deg, #ffd8a0, #ffc06b);
-      transform: rotate(45deg);
-      opacity: 0.78;
-      pointer-events: none;
-      border-radius: 4px;
-      animation: rise linear forwards;
-      box-shadow: 0 0 10px rgba(255, 208, 138, 0.45);
+      top: 6px;
+      left: 10px;
+      width: 150px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ff90bd, #ff5f99);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+      transform-origin: center bottom;
+      transition: transform 0.75s ease;
+      z-index: 3;
     }
 
-    .tiny-heart::before,
-    .tiny-heart::after {
+    .gift-lid::before {
       content: "";
       position: absolute;
-      width: 18px;
+      left: 50%;
+      top: 0;
+      width: 22px;
+      height: 100%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #ffd2e5, #ffbdd8);
+    }
+
+    .gift-box {
+      position: absolute;
+      left: 16px;
+      bottom: 8px;
+      width: 138px;
+      height: 88px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #ff77ad, #ff4b8f);
+      box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
+      transition: transform 0.55s ease;
+      z-index: 2;
+    }
+
+    .gift-box::before,
+    .gift-box::after {
+      content: "";
+      position: absolute;
+      background: linear-gradient(180deg, #ffe2ef, #ffcde3);
+    }
+
+    .gift-box::before {
+      left: 50%;
+      top: 0;
+      width: 24px;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+
+    .gift-box::after {
+      left: 0;
+      top: 36px;
+      width: 100%;
+      height: 16px;
+    }
+
+    .gift-bow {
+      position: absolute;
+      left: 50%;
+      top: 3px;
+      width: 46px;
+      height: 20px;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+
+    .gift-bow::before,
+    .gift-bow::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 22px;
       height: 18px;
-      background: inherit;
+      border: 3px solid #ffd8e9;
+      border-radius: 80% 80% 20% 20%;
+    }
+
+    .gift-bow::before { left: 0; transform: rotate(-14deg); }
+    .gift-bow::after { right: 0; transform: rotate(14deg); }
+
+    .gift-spark {
+      position: absolute;
+      left: 50%;
+      top: 54px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
+      background: #ffd5e8;
+      opacity: 0;
+      pointer-events: none;
     }
 
-    .tiny-heart::before { left: -9px; }
-    .tiny-heart::after { top: -9px; }
-
-    @keyframes rise {
-      0% { transform: translateY(0) rotate(45deg) scale(0.7); opacity: 0; }
-      15% { opacity: 0.9; }
-      100% { transform: translateY(-110vh) rotate(45deg) scale(1.15); opacity: 0; }
+    .opening .gift-lid {
+      transform: translateY(-40px) rotateX(70deg);
     }
+
+    .opening .gift-box {
+      transform: scale(0.98);
+    }
+
+    .opening .gift-spark {
+      animation: pop 0.9s ease forwards;
+    }
+
+    .opening .gift-spark.s2 { animation-delay: 0.07s; }
+    .opening .gift-spark.s3 { animation-delay: 0.13s; }
+    .opening .gift-spark.s4 { animation-delay: 0.2s; }
+
+    @keyframes pop {
+      0% { opacity: 0; transform: translate(-50%, 0) scale(0.5); }
+      25% { opacity: 1; }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--x)), var(--y)) scale(1.2); }
+    }
+
+    .gift-tip {
+      color: #ffd0e4;
+      font-size: 0.98rem;
+      letter-spacing: 1px;
+    }
+
   </style>
 </head>
 <body>
   <div class="stars"></div>
+  <canvas class="fireworks-canvas" id="fireworksCanvas"></canvas>
 
-  <main class="wrap">
-    <div class="heart-scene">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <canvas id="heartCanvas"></canvas>
+  <main class="cover">
+    <h1>陈依子欣的520礼物</h1>
+    <div class="gift-wrap">
+      <button class="gift-btn" id="giftBtn" type="button" aria-label="拆开礼盒进入爱心界面">
+        <span class="gift-lid"></span>
+        <span class="gift-box"></span>
+        <span class="gift-bow"></span>
+        <span class="gift-spark s1" style="--x:-54px; --y:-68px;"></span>
+        <span class="gift-spark s2" style="--x:56px; --y:-68px;"></span>
+        <span class="gift-spark s3" style="--x:-14px; --y:-82px;"></span>
+        <span class="gift-spark s4" style="--x:18px; --y:-86px;"></span>
+      </button>
+      <p class="gift-tip">🎁 轻触拆开礼盒</p>
     </div>
-
-    <h1>520 快乐</h1>
-    <p class="msg">
-      亲爱的<span class="highlight">宝贝</span>，<br />
-      遇见你是我最幸运的事。<br />
-      未来的每一天，都想和你一起发光发热。<br />
-      <span class="highlight">我爱你，不止 520。</span>
-    </p>
-    <p class="footer">- 永远爱你的我 -</p>
-    <a class="enter-btn" href="./love-letter.html">💌 点开有惊喜哟</a>
   </main>
-
   <script>
-    const canvas = document.getElementById("heartCanvas");
-    const scene = document.querySelector(".heart-scene");
-    const ctx = canvas.getContext("2d");
-    const particles = [];
+    const giftBtn = document.getElementById("giftBtn");
+    const fireworksCanvas = document.getElementById("fireworksCanvas");
+    const fctx = fireworksCanvas.getContext("2d");
+    let opening = false;
+    const rockets = [];
     const sparks = [];
-    const targetPoints = [];
+    const blooms = [];
+    const flashes = [];
+    const comets = [];
+    const cometDust = [];
+    const palette = [15, 38, 52, 188, 205, 228, 258, 282, 318, 338];
+    const burstTypes = ["burst", "ring", "streak", "willow"];
 
-    function heartPoint(t) {
-      const x = 16 * Math.pow(Math.sin(t), 3);
-      const y =
-        13 * Math.cos(t) -
-        5 * Math.cos(2 * t) -
-        2 * Math.cos(3 * t) -
-        Math.cos(4 * t);
-      return { x, y };
+    function resizeFireworks() {
+      fireworksCanvas.width = window.innerWidth;
+      fireworksCanvas.height = window.innerHeight;
     }
 
-    function setupCanvas() {
-      const rect = scene.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.floor(rect.width * dpr);
-      canvas.height = Math.floor(rect.height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      buildTargetPoints(rect.width, rect.height);
-      initParticles(rect.width, rect.height);
+    function launchFirework() {
+      const x = window.innerWidth * (0.15 + Math.random() * 0.7);
+      const y = window.innerHeight * (0.18 + Math.random() * 0.38);
+      const baseHue = palette[Math.floor(Math.random() * palette.length)];
+      const type = burstTypes[Math.floor(Math.random() * burstTypes.length)];
+      rockets.push({
+        x,
+        y: window.innerHeight + 10,
+        tx: x + (Math.random() - 0.5) * 80,
+        ty: y,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: -7.6 - Math.random() * 1.8,
+        hue: baseHue + (Math.random() * 14 - 7),
+        sat: 88 + Math.random() * 10,
+        lit: 74 + Math.random() * 12,
+        type
+      });
     }
 
-    function buildTargetPoints(w, h) {
-      targetPoints.length = 0;
-      const scale = Math.min(w, h) * 0.26;
-      const cx = w * 0.5;
-      const cy = h * 0.45;
+    function launchAt(xRatio = 0.5, yRatio = 0.3) {
+      const baseHue = palette[Math.floor(Math.random() * palette.length)];
+      const x = window.innerWidth * xRatio;
+      const y = window.innerHeight * yRatio;
+      rockets.push({
+        x,
+        y: window.innerHeight + 10,
+        tx: x + (Math.random() - 0.5) * 60,
+        ty: y,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: -8.2 - Math.random() * 2,
+        hue: baseHue + (Math.random() * 14 - 7),
+        sat: 90 + Math.random() * 9,
+        lit: 78 + Math.random() * 12,
+        type: burstTypes[Math.floor(Math.random() * burstTypes.length)]
+      });
+    }
 
-      for (let i = 0; i < 1400; i += 1) {
-        const t = Math.random() * Math.PI * 2;
-        const p = heartPoint(t);
+    function firstVolley() {
+      const wave1 = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
+      wave1.forEach((pos, i) => {
+        setTimeout(() => launchAt(pos, 0.26 + Math.random() * 0.09), i * 55);
+      });
 
-        const thickness = 0.8 + Math.random() * 0.45;
-        targetPoints.push({
-          x: cx + p.x * scale * 0.06 * thickness,
-          y: cy - p.y * scale * 0.06 * thickness
+      setTimeout(() => {
+        const wave2 = [0.14, 0.26, 0.38, 0.5, 0.62, 0.74, 0.86];
+        wave2.forEach((pos, i) => {
+          setTimeout(() => launchAt(pos, 0.2 + Math.random() * 0.07), i * 50);
+        });
+      }, 320);
+
+      setTimeout(() => {
+        const wave3 = [0.22, 0.36, 0.5, 0.64, 0.78];
+        wave3.forEach((pos, i) => {
+          setTimeout(() => launchAt(pos, 0.16 + Math.random() * 0.06), i * 45);
+        });
+      }, 620);
+    }
+
+    function pointOnQuadratic(start, control, end, t) {
+      const mt = 1 - t;
+      return {
+        x: mt * mt * start.x + 2 * mt * t * control.x + t * t * end.x,
+        y: mt * mt * start.y + 2 * mt * t * control.y + t * t * end.y
+      };
+    }
+
+    function launchCometArc() {
+      const w = fireworksCanvas.width;
+      const h = fireworksCanvas.height;
+      const start = { x: w * 0.9, y: h * 0.57 };
+      const control = { x: w * 0.5, y: h * -0.02 };
+      const end = { x: w * 0.16, y: h * 0.36 };
+      comets.push({
+        t: 0,
+        speed: 0.0085 + Math.random() * 0.002,
+        hue: 42 + Math.random() * 12,
+        start,
+        control,
+        end
+      });
+    }
+
+    function explode(x, y, hue, sat, lit, type) {
+      let count = 72 + Math.floor(Math.random() * 46);
+      if (type === "ring") count = 44 + Math.floor(Math.random() * 20);
+      if (type === "willow") count = 86 + Math.floor(Math.random() * 32);
+
+      flashes.push({
+        x,
+        y,
+        r: 2,
+        vr: 3 + Math.random() * 2,
+        life: 18,
+        maxLife: 18,
+        hue
+      });
+
+      if (type === "ring") {
+        blooms.push({
+          x, y, r: 8, vr: 2.4, life: 30, maxLife: 30, hue, sat, lit
         });
       }
-    }
 
-    function initParticles(w, h) {
-      particles.length = 0;
-      sparks.length = 0;
+      for (let i = 0; i < count; i += 1) {
+        const angle = (Math.PI * 2 * i) / count;
+        let speed = 1.9 + Math.random() * 4.5;
+        let life = 44 + Math.random() * 28;
+        let shape = "dot";
+        let size = 1.9;
 
-      for (let i = 0; i < 1800; i += 1) {
-        particles.push({
-          x: Math.random() * w,
-          y: h * (0.58 + Math.random() * 0.38),
-          vx: 0,
-          vy: 0,
-          size: 0.8 + Math.random() * 2.2,
-          glow: 0.55 + Math.random() * 0.45,
-          offset: Math.random() * 1000
-        });
-      }
+        if (type === "streak") {
+          speed = 2.2 + Math.random() * 4.8;
+          life = 38 + Math.random() * 24;
+          shape = "streak";
+          size = 1.4 + Math.random() * 0.8;
+        } else if (type === "ring") {
+          speed = 3 + Math.random() * 2.1;
+          life = 34 + Math.random() * 18;
+        } else if (type === "willow") {
+          speed = 1 + Math.random() * 2.4;
+          life = 62 + Math.random() * 34;
+          shape = "glitter";
+          size = 1.5 + Math.random() * 1.1;
+        }
 
-      for (let i = 0; i < 500; i += 1) {
         sparks.push({
-          x: Math.random() * w,
-          y: h * (0.65 + Math.random() * 0.35),
-          size: 0.6 + Math.random() * 2.3,
-          alpha: 0.2 + Math.random() * 0.55,
-          twinkle: Math.random() * 1000
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life,
+          maxLife: life,
+          alpha: 1,
+          hue: hue + (Math.random() * 34 - 17),
+          sat: sat - 4 + Math.random() * 8,
+          lit: lit - 2 + Math.random() * 12,
+          shape,
+          size
         });
       }
     }
 
-    function drawHeartParticles(w, h, time) {
-      const beat = 1 + Math.sin(time * 0.006) * 0.03 + Math.sin(time * 0.012) * 0.012;
-      const cx = w * 0.5;
-      const cy = h * 0.45;
+    function animateFireworks() {
+      fctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+      fctx.globalCompositeOperation = "lighter";
 
-      for (let i = 0; i < particles.length; i += 1) {
-        const p = particles[i];
-        const target = targetPoints[i % targetPoints.length];
+      for (let i = flashes.length - 1; i >= 0; i -= 1) {
+        const f = flashes[i];
+        f.r += f.vr;
+        f.life -= 1;
+        const a = Math.max(0, f.life / f.maxLife);
 
-        const tx = cx + (target.x - cx) * beat + Math.sin(time * 0.0018 + p.offset) * 1.1;
-        const ty = cy + (target.y - cy) * beat + Math.cos(time * 0.0016 + p.offset) * 1.1;
+        const grad = fctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${0.92 * a})`);
+        grad.addColorStop(0.35, `hsla(${f.hue}, 100%, 86%, ${0.68 * a})`);
+        grad.addColorStop(1, `hsla(${f.hue}, 100%, 74%, 0)`);
+        fctx.fillStyle = grad;
+        fctx.beginPath();
+        fctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        fctx.fill();
 
-        p.vx += (tx - p.x) * 0.028;
-        p.vy += (ty - p.y) * 0.028;
-        p.vx *= 0.86;
-        p.vy *= 0.86;
+        if (f.life <= 0) flashes.splice(i, 1);
+      }
+
+      for (let i = comets.length - 1; i >= 0; i -= 1) {
+        const c = comets[i];
+        c.t += c.speed;
+        const t = Math.min(c.t, 1);
+        const p = pointOnQuadratic(c.start, c.control, c.end, t);
+
+        cometDust.push({
+          x: p.x,
+          y: p.y,
+          life: 26 + Math.random() * 12,
+          maxLife: 32,
+          hue: c.hue,
+          size: 1.6 + Math.random() * 1.5
+        });
+
+        const headGrad = fctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 22);
+        headGrad.addColorStop(0, "rgba(255,255,255,1)");
+        headGrad.addColorStop(0.35, `hsla(${c.hue}, 100%, 86%, 0.96)`);
+        headGrad.addColorStop(1, `hsla(${c.hue}, 100%, 78%, 0)`);
+        fctx.fillStyle = headGrad;
+        fctx.beginPath();
+        fctx.arc(p.x, p.y, 22, 0, Math.PI * 2);
+        fctx.fill();
+
+        if (c.t >= 1) {
+          explode(p.x, p.y, c.hue, 96, 84, "ring");
+          flashes.push({
+            x: p.x, y: p.y, r: 2, vr: 4.4, life: 24, maxLife: 24, hue: c.hue
+          });
+          comets.splice(i, 1);
+        }
+      }
+
+      for (let i = cometDust.length - 1; i >= 0; i -= 1) {
+        const d = cometDust[i];
+        d.life -= 1;
+        const a = Math.max(0, d.life / d.maxLife);
+        fctx.beginPath();
+        fctx.fillStyle = `hsla(${d.hue}, 100%, 86%, ${a * 0.82})`;
+        fctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+        fctx.fill();
+        if (d.life <= 0) cometDust.splice(i, 1);
+      }
+
+      for (let i = blooms.length - 1; i >= 0; i -= 1) {
+        const b = blooms[i];
+        b.r += b.vr;
+        b.life -= 1;
+        const a = Math.max(0, b.life / b.maxLife);
+        fctx.beginPath();
+        fctx.strokeStyle = `hsla(${b.hue}, ${b.sat}%, ${b.lit + 10}%, ${a * 0.95})`;
+        fctx.lineWidth = 2.8;
+        fctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        fctx.stroke();
+        if (b.life <= 0) blooms.splice(i, 1);
+      }
+
+      for (let i = rockets.length - 1; i >= 0; i -= 1) {
+        const r = rockets[i];
+        r.x += r.vx;
+        r.y += r.vy;
+        r.vy += 0.03;
+
+        fctx.beginPath();
+        fctx.fillStyle = `hsla(${r.hue}, ${r.sat}%, ${r.lit}%, 0.98)`;
+        fctx.arc(r.x, r.y, 2.3, 0, Math.PI * 2);
+        fctx.fill();
+
+        if (r.y <= r.ty || r.vy > -1.3) {
+          explode(r.x, r.y, r.hue, r.sat, r.lit, r.type);
+          rockets.splice(i, 1);
+        }
+      }
+
+      for (let i = sparks.length - 1; i >= 0; i -= 1) {
+        const p = sparks[i];
         p.x += p.vx;
         p.y += p.vy;
+        p.vy += p.shape === "willow" ? 0.032 : 0.045;
+        p.vx *= p.shape === "willow" ? 0.978 : 0.986;
+        p.life -= 1;
+        p.alpha = Math.max(0, p.life / p.maxLife);
 
-        const blink = 0.6 + Math.sin(time * 0.01 + p.offset) * 0.4;
-        const alpha = Math.max(0.16, p.glow * blink);
+        if (p.shape === "streak") {
+          fctx.beginPath();
+          fctx.strokeStyle = `hsla(${p.hue}, ${p.sat}%, ${p.lit + 3}%, ${Math.min(1, p.alpha * 1.08)})`;
+          fctx.lineWidth = p.size;
+          fctx.moveTo(p.x - p.vx * 3.5, p.y - p.vy * 3.5);
+          fctx.lineTo(p.x, p.y);
+          fctx.stroke();
+        } else if (p.shape === "glitter") {
+          fctx.fillStyle = `hsla(${p.hue}, ${p.sat}%, ${p.lit + 11}%, ${Math.min(1, p.alpha * 1.1)})`;
+          fctx.fillRect(p.x - p.size * 0.5, p.y - p.size * 0.5, p.size, p.size);
+        } else {
+          fctx.beginPath();
+          fctx.fillStyle = `hsla(${p.hue}, ${p.sat}%, ${p.lit + 4}%, ${Math.min(1, p.alpha * 1.08)})`;
+          fctx.arc(p.x, p.y, p.size * 1.1, 0, Math.PI * 2);
+          fctx.fill();
+        }
 
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 219, 150, ${alpha.toFixed(3)})`;
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
+        if (p.life <= 0) sparks.splice(i, 1);
       }
+
+      fctx.globalCompositeOperation = "source-over";
+      requestAnimationFrame(animateFireworks);
     }
 
-    function drawBottomSparks(w, h, time) {
-      for (let i = 0; i < sparks.length; i += 1) {
-        const s = sparks[i];
-        const tw = 0.55 + Math.sin(time * 0.004 + s.twinkle) * 0.45;
-        const alpha = s.alpha * tw;
+    giftBtn.addEventListener("click", () => {
+      if (opening) return;
+      opening = true;
+      giftBtn.classList.add("opening");
+      setTimeout(() => {
+        smoothNavigate("./heart.html", 420);
+      }, 620);
+    });
 
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 215, 140, ${alpha.toFixed(3)})`;
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    function smoothNavigate(url, delay = 420) {
+      document.body.classList.add("page-leave");
+      setTimeout(() => {
+        window.location.href = url;
+      }, delay);
     }
 
-    function animateHeart(time) {
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
+    requestAnimationFrame(() => {
+      document.body.classList.add("page-ready");
+    });
 
-      ctx.clearRect(0, 0, w, h);
-      drawBottomSparks(w, h, time);
-      drawHeartParticles(w, h, time);
-      requestAnimationFrame(animateHeart);
-    }
-
-    function createTinyHeart() {
-      const heart = document.createElement("span");
-      heart.className = "tiny-heart";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.bottom = "-22px";
-
-      const size = 10 + Math.random() * 16;
-      const duration = 4 + Math.random() * 4;
-      const drift = (Math.random() - 0.5) * 140;
-
-      heart.style.width = size + "px";
-      heart.style.height = size + "px";
-      heart.style.animationDuration = duration + "s";
-      heart.style.marginLeft = drift + "px";
-      heart.style.opacity = (0.45 + Math.random() * 0.35).toFixed(2);
-
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), duration * 1000);
-    }
-
-    setupCanvas();
-    requestAnimationFrame(animateHeart);
-    window.addEventListener("resize", setupCanvas);
-    setInterval(createTinyHeart, 460);
+    resizeFireworks();
+    animateFireworks();
+    window.addEventListener("resize", resizeFireworks);
+    launchCometArc();
+    setTimeout(launchCometArc, 1200);
+    setInterval(launchCometArc, 7800);
+    firstVolley();
+    setInterval(() => {
+      launchFirework();
+      if (Math.random() > 0.45) launchFirework();
+      if (Math.random() > 0.82) launchFirework();
+    }, 420);
+    launchFirework();
+    setTimeout(launchFirework, 380);
   </script>
 </body>
 </html>

@@ -27,6 +27,19 @@
       background: radial-gradient(circle at 50% 15%, #223a63 0%, var(--bg2) 34%, var(--bg1) 100%);
       overflow: hidden;
       padding: 16px;
+      opacity: 0;
+      transform: scale(1.01);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    body.page-ready {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    body.page-leave {
+      opacity: 0;
+      transform: scale(0.99);
     }
 
     .card {
@@ -445,7 +458,7 @@
 
     <div class="actions">
       <a class="btn btn-main" href="./love-letter.html">💌 回到情书页</a>
-      <a class="btn btn-ghost" href="./index.html">✨ 回到爱心页</a>
+      <a class="btn btn-ghost" href="./heart.html">✨ 回到爱心页</a>
     </div>
   </main>
   <script>
@@ -499,6 +512,13 @@
       screenState = "off";
     }
 
+    function smoothNavigate(url, delay = 420) {
+      document.body.classList.add("page-leave");
+      setTimeout(() => {
+        window.location.href = url;
+      }, delay);
+    }
+
     powerBtn.addEventListener("click", () => {
       if (screenState === "off") {
         powerOn();
@@ -509,8 +529,21 @@
 
     lockScreen.addEventListener("click", unlockToDesktop);
 
+    document.querySelectorAll("a[href]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const href = link.getAttribute("href");
+        if (!href || href.startsWith("#") || href.startsWith("javascript:")) return;
+        event.preventDefault();
+        smoothNavigate(href);
+      });
+    });
+
     updateDeskTime();
     setInterval(updateDeskTime, 10000);
+    requestAnimationFrame(() => {
+      document.body.classList.add("page-ready");
+    });
   </script>
 </body>
 </html>
